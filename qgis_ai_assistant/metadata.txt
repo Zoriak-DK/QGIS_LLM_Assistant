@@ -1,0 +1,22 @@
+[general]
+name=Assistant IA QGIS
+about=Un assistant IA pour QGIS qui peut analyser des projets, exécuter des outils et répondre aux questions des utilisateurs.
+description=Assistant IA QGIS (pour QGIS 4.2+) intègre des modèles de langage avancés pour aider les utilisateurs à analyser leurs projets QGIS, exécuter des outils de géotraitement et obtenir des réponses à leurs questions SIG. Les utilisateurs peuvent configurer l'URL de l'API, la clé API et le modèle dans le menu des paramètres. Nécessite QGIS 4.2 ou supérieur.
+version=1.0.0
+qgisMinimumVersion=4.2
+author=Équipe Assistant IA QGIS
+email=support@qgis-ai-assistant.example.com
+aboutUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant
+changelogUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant/releases
+homepageUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant
+bugTrackerUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant/issues
+repositoryUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant
+pullRequestUrl=https://github.com/Zoriak-DK/QGIS_LLM_Assistant/pulls
+tags=IA, assistant, analyse, outils, chat, LLM, QGIS4.2, QGIS4
+icon=icons/icon.svg
+
+[plugin]
+classifier=QgsPluginClassifier(QgsPluginClassifier.Core)
+
+[files]
+qgis_ai_assistant=qgis_ai_assistant

@@ -1,0 +1,36 @@
+name: Build QGIS plugin ZIP
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build plugin ZIP
+        id: package
+        run: |
+          version="$(sed -n 's/^version=//p' qgis_ai_assistant/metadata.txt | head -n 1)"
+          if [ -z "$version" ]; then
+            echo "Could not read plugin version from qgis_ai_assistant/metadata.txt" >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          zip -r "Assistant_IA_QGIS_v${version}.zip" qgis_ai_assistant \
+            -x '*/__pycache__/*' '*.pyc' '*/.DS_Store' '*.backup'
+
+      - name: Upload plugin ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Assistant_IA_QGIS_v${{ steps.package.outputs.version }}
+          path: Assistant_IA_QGIS_v${{ steps.package.outputs.version }}.zip
+          if-no-files-found: error

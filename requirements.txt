@@ -1,0 +1,25 @@
+# Exigences du plugin Assistant IA QGIS
+# Ce fichier liste les packages Python requis par le plugin
+
+# Requêtes HTTP
+requests>=2.25.0
+
+# Remarque : La plupart des dépendances devraient déjà être incluses avec QGIS
+# N'ajoutez que les packages qui ne font pas partie de l'installation standard de QGIS
+
+# Pour le développement et les tests
+testpaths>=0.3.1
+pytest>=7.0.0
+pytest-qt>=4.0.0
+pytest-cov>=3.0.0
+
+# Pour construire la documentation (optionnel)
+Sphinx>=4.0.0
+sphinx-rtd-theme>=0.5.0
+
+# Pour l'internationalisation (optionnel)
+Babel>=2.9.0
+
+# Remarque : Le plugin doit fonctionner avec les versions de Qt, PyQt et QGIS
+# qui sont incluses avec la distribution QGIS. Ne spécifiez pas ces
+# packages car ils sont gérés par QGIS.
