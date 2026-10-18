@@ -4,13 +4,16 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-
-permissions:
-  contents: read
+  release:
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.package.outputs.version }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -34,3 +37,20 @@ jobs:
           name: Assistant_IA_QGIS_v${{ steps.package.outputs.version }}
           path: Assistant_IA_QGIS_v${{ steps.package.outputs.version }}.zip
           if-no-files-found: error
+
+  publish-release:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download plugin ZIP
+        uses: actions/download-artifact@v4
+        with:
+          name: Assistant_IA_QGIS_v${{ needs.build.outputs.version }}
+
+      - name: Attach plugin ZIP to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" "Assistant_IA_QGIS_v${{ needs.build.outputs.version }}.zip" --clobber
